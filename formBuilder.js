@@ -50,10 +50,11 @@
                 validation, 
                 disabled = false, 
                 apply, 
+                className = null,
                 width = null, 
                 value = null,
                 options = []}) => new Field(
-                    name, label, type, order, validation, disabled, apply, width, value, options));
+                    name, label, type, order, validation, disabled, apply, className, width, value, options));
         }
         
         getFields(){ return this.fields; }
@@ -114,10 +115,19 @@
                 }
                 if(field.apply){
                     switch(field.type) {
-                        case 'text':case 'password':case 'number':case 'email':
+                        case 'label':
                             html += `<div class="row" id="${field.name}-container">
                                         <div class="col-sm-${field.width || "12"}">
                                             <span id="${field.name}-label">${field.label}</span>
+                                        </div>
+                                    </div><br>`;
+                            currentRow++;
+                            break;
+                        case 'text':case 'password':case 'number':case 'email':
+                            html += `<div class="row" id="${field.name}-container">
+                                        <span id="${field.name}-label">${field.label}</span>
+                                        <div class="col-sm-${field.width || "12"}">
+                                            
                                             <input type="${field.type}" class="form-control ${field.className || ""}" id="${field.name}" value="${field.value || ""}" ${ field.disabled ? "disabled" : "" }>
                                         </div>
                                     </div><br>`;
@@ -126,8 +136,8 @@
                             
                         case 'file':
                             html += `<div class="row" id="${field.name}-container">
+                                        <span>${field.label}</span>
                                         <div class="col-sm-12">
-                                            <span>${field.label}</span>
                                             <input type="file" id="${field.name}">
                                         </div>
                                     </div><br>`;
@@ -136,8 +146,8 @@
                             
                         case 'radio':
                             html += `<div class="row" id="${field.name}-container">
+                                        <span>${field.label}</span>
                                         <div class="col-sm-12">
-                                            <span>${field.label}</span>
                                             ${field.options?.map(this.transformRadioOptions(field.name + "-radio"))}
                                         </div>
                                     </div><br>`;
@@ -146,8 +156,8 @@
                             
                         case 'select':
                             html += `<div class="row" id="${field.name}-container">
+                                        <span>${field.label}</span>
                                         <div class="col-sm-12">
-                                            <span>${field.label}</span>
                                             <select class="form-control" id="${field.name}" value="${field.value}"></select>
                                         </div>
                                     </div><br>`;
@@ -156,8 +166,8 @@
                             
                         case 'date':
                             html += `<div class="row"  id="${field.name}-container">
+                                        <span>${field.label}</span>
                                         <div class="col-sm-12">
-                                            <span>${field.label}</span>
                                             <div class="input-group date">
                                                 <input type="date" id="${field.name}" class="form-control" value="${field.value}">
                                             </div>
@@ -168,8 +178,8 @@
                             
                         case 'textarea':
                             html += `<div class="row" id="${field.name}-container">
+                                        <span>${field.label}</span>
                                         <div class="col-sm-12">
-                                            <span>${field.label}</span>
                                             <textarea style="resize: none; height: 12vh;" class="form-control" maxlength="1000" id="${field.name}">${field.value}</textarea>
                                         </div>
                                     </div><br>`;
@@ -179,7 +189,7 @@
                         case 'button':
                             html += `<div class="row" id="${field.name}-container">
                                         <div class="col-sm-12">
-                                            button
+                                        <button id="${field.name}" class="btn ${field.className || ""}">${field.label}</button>
                                         </div>
                                     </div><br>`;
                             currentRow++;

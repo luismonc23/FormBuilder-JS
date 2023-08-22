@@ -1,6 +1,6 @@
 (function(global, $) {
     class Field{
-        constructor(name, label, type, order, validation, disabled, apply, width, value, slots, options) {
+        constructor(name, label, type, order, validation, disabled, apply, className, width, value, options) {
             this.name = name;
             this.label = label;
             this.type = type;
@@ -8,9 +8,10 @@
             this.validation = validation;
             this.disabled = disabled;
             this.apply = apply;
+            this.className = className;
             this.width = width;
             this.value = value;
-            this.slots = slots;
+            //this.slots = slots;
             this.options = options;
             //field.customProps = "onkeyup='' onchange=''";
 
@@ -21,7 +22,8 @@
             //custom props
             //default value
             //Some kind of callback like ajax
-            //file allowed extensions
+            //for file: allowed extensions
+            //slots ${field.slots?.columnEnd ?? ""}
         }
 
         getName() { return this.label; }
@@ -31,9 +33,10 @@
         getValidation() { return this.validation; }
         getDisabled() { return this.disabled; }
         getApply() { return this.apply; }
+        getClassName() { return this.className; }
         getWidth() { return this.width; }
         getValue() { return this.value; }
-        getSlots() { return this.slots; }
+        //getSlots() { return this.slots; }
         //static getFromArray()
     }
     class Form{
@@ -45,16 +48,14 @@
                 type, 
                 order, 
                 validation, 
-                disabled, 
+                disabled = false, 
                 apply, 
                 width = null, 
-                value = null, 
-                slots = [], 
+                value = null,
                 options = []}) => new Field(
-                    name, label, type, order, validation, disabled, apply, width, value, slots, options));
+                    name, label, type, order, validation, disabled, apply, width, value, options));
         }
         
-        //create form from a jquery element
         getFields(){ return this.fields; }
 
         validateFieldsConfig(fields){
@@ -94,7 +95,6 @@
     FormBuilder.prototype.build = function(target, fields) {
         // add params: columns, name (for className also)
         //if ($) {
-        debugger;
         try {
             const form = new Form(fields);
             const fieldsList = form.getFields();
@@ -114,12 +114,11 @@
                 }
                 if(field.apply){
                     switch(field.type) {
-                        case 'text':case 'password':case 'number':
+                        case 'text':case 'password':case 'number':case 'email':
                             html += `<div class="row" id="${field.name}-container">
-                                        <div class="col-sm-${field.width}">
+                                        <div class="col-sm-${field.width || "12"}">
                                             <span id="${field.name}-label">${field.label}</span>
-                                            <input type="${field.type}" class="form-control ${field.className}" id="${field.name}" value="${field.value}">
-                                            ${field.slots?.columnEnd ?? ""}
+                                            <input type="${field.type}" class="form-control ${field.className || ""}" id="${field.name}" value="${field.value || ""}" ${ field.disabled ? "disabled" : "" }>
                                         </div>
                                     </div><br>`;
                             currentRow++;
@@ -130,7 +129,6 @@
                                         <div class="col-sm-12">
                                             <span>${field.label}</span>
                                             <input type="file" id="${field.name}">
-                                            ${field.slots?.columnEnd ?? ""}
                                         </div>
                                     </div><br>`;
                             currentRow++;

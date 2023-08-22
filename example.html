@@ -13,6 +13,21 @@
         <div id="form-builder-example"></div>
     </main>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
-	<script src="test.js"></script>
+    <script src="formBuilder.js"></script>
+    <script>
+      var fb = new FormBuilder();
+      let fields = [
+          { name: "text1",
+            label: "Simple text input",
+            type: "text",
+            order: 0,
+            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+      ];
+      fb.build("#form-builder-example", fields);
+    </script>
+	<!-- <script src="test.js"></script> -->
   </body>
 </html>

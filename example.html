@@ -9,19 +9,75 @@
   </head>
   <body>
     <main>
-        <h1>Form Builder Examples</h1>  
-        <div id="form-builder-example"></div>
+      <div id="main-container" class="container">
+        <h1>Form Builder Examples</h1> 
+        <div class="container-fluid">
+            <h2>Basic inputs</h2>
+            <div id="form-builder-example"></div>
+        </div> 
+      </div>
     </main>
     <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="formBuilder.js"></script>
     <script>
       var fb = new FormBuilder();
       let fields = [
-          { name: "text1",
+          { name: "text-input",
             label: "Simple text input",
             type: "text",
             order: 0,
             validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "description",
+            label: "This is an example description label, with no input elements",
+            type: "label",
+            order: 1,
+            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "text-password",
+            label: "Simple password input",
+            type: "password",
+            order: 2,
+            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "text-number",
+            label: "Simple number input, with custom width",
+            type: "number",
+            width: 6,
+            order: 3,
+            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "description-button",
+            label: "Simple button with custom class (btn-success):",
+            type: "label",
+            order: 4,
+            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "button",
+            label: "Simple button",
+            type: "button",
+            className: "btn-success",
+            order: 5,
+            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "text-with-value",
+            label: "Simple text input with predefined value",
+            type: "text",
+            order: 6,
+            validation: null,
+            value: "Default value",
             disabled: false, 
             apply: true 
           },

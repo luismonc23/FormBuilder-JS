@@ -26,7 +26,6 @@
             label: "Simple text input",
             type: "text",
             order: 0,
-            validation: null,
             disabled: false, 
             apply: true 
           },
@@ -34,7 +33,6 @@
             label: "This is an example description label, with no input elements",
             type: "label",
             order: 1,
-            validation: null,
             disabled: false, 
             apply: true 
           },
@@ -42,7 +40,13 @@
             label: "Simple password input",
             type: "password",
             order: 2,
-            validation: null,
+            disabled: false, 
+            apply: true 
+          },
+          { name: "text-password",
+            label: "Simple email input",
+            type: "email",
+            order: 2,
             disabled: false, 
             apply: true 
           },
@@ -51,7 +55,6 @@
             type: "number",
             width: 6,
             order: 3,
-            validation: null,
             disabled: false, 
             apply: true 
           },
@@ -59,7 +62,6 @@
             label: "Simple button with custom class (btn-success):",
             type: "label",
             order: 4,
-            validation: null,
             disabled: false, 
             apply: true 
           },
@@ -68,7 +70,6 @@
             type: "button",
             className: "btn-success",
             order: 5,
-            validation: null,
             disabled: false, 
             apply: true 
           },
@@ -76,8 +77,14 @@
             label: "Simple text input with predefined value",
             type: "text",
             order: 6,
-            validation: null,
             value: "Default value",
+            disabled: false, 
+            apply: true 
+          },
+          { name: "button-submit",
+            label: "Submit button",
+            type: "submit",
+            order: 5,
             disabled: false, 
             apply: true 
           },
